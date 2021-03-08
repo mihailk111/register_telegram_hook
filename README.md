@@ -1,1 +1,1 @@
-USAGE -> "php <FILE> --help"
+USAGE -> "php \<FILE\> --help"
