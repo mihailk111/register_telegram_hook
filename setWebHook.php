@@ -38,13 +38,19 @@ MS;
         $hook = $argv[2];
 
 
-        $comand = "curl ./temp ./ https://api.telegram.org/bot".$token."/setwebhook?url=".$hook;
+        $comand = "curl https://api.telegram.org/bot".$token."/setwebhook?url=".$hook;
         exec($comand, $response);
 
         
 
 
-        echo  PHP_EOL ." \e[1;32m " . implode("\n", $response) . "\e[0m" . PHP_EOL. PHP_EOL; 
+        $json = json_decode( implode("\n", $response), true);
+
+        echo  PHP_EOL ." \e[1;32m ";
+        
+        print_r($json);
+
+        echo "\e[0m" . PHP_EOL. PHP_EOL ;
 
     }
     else if (count($argv) === 4)
@@ -57,7 +63,13 @@ MS;
         $comand = "curl -F url=". $hook ." -F certificate=@".$file." https://api.telegram.org/bot".$token."/setwebhook";
         exec($comand, $response);
 
-        echo  "\e[1;32m" . PHP_EOL . implode("\n", $response) . PHP_EOL . PHP_EOL. "\e[0m"; 
+        $json = json_decode( implode("\n", $response), true);
+
+        echo  PHP_EOL ." \e[1;32m ";
+        
+        print_r($json);
+
+        echo "\e[0m" . PHP_EOL. PHP_EOL ;
 
     }
     else
